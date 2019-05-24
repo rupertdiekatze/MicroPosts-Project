@@ -1,10 +1,16 @@
-// const greeting = 'Hello World';
-// console.log(greeting);
+// Import the http library
+import { EasyHTTP } from './http';
+import { UI } from './ui';
 
-// const getData = async (url) => {
-//   const response = await fetch(url);
-//   const result = await response.json();
-//   console.log(result);
-// };
+// Instanciate a new instances
+const http = new EasyHTTP();
+const ui = new UI();
 
-// getData('https://jsonplaceholder.typicode.com/posts');
+// Get posts on DOM load
+document.addEventListener('DOMContentLoaded', getPosts);
+
+function getPosts() {
+  http.get('http://localhost:3000/posts')
+  .then(data => ui.showPosts(data))
+  .catch(err => console.log(err));
+}
